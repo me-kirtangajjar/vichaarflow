@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./partials/style'); %>
+    <title><%= blog.title %> - VichaarFlow</title>
+    <style>
+      .cover-image {
+        height: 400px;
+        object-fit: cover;
+      }
+      .blog-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+      .blog-meta {
+        font-size: 0.9rem;
+      }
+      .blog-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      .comment-form {
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+      }
+      .comment-list {
+        max-height: 500px;
+        overflow-y: auto;
+      }
+      .comment {
+        border-bottom: 1px solid #e9ecef;
+        padding: 1rem 0;
+      }
+      .comment:last-child {
+        border-bottom: none;
+      }
+      .btn-interact {
+        transition: all 0.3s;
+      }
+      .btn-interact:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <%- include('./partials/navbar'); %>
+
+    <main class="py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <article class="bg-white rounded-3 shadow-sm overflow-hidden">
+              <img
+                src="<%=blog.coverImage%>"
+                alt="<%=blog.title%>"
+                class="w-100 cover-image"
+              />
+              <div class="p-4">
+                <h1 class="blog-title mb-3"><%= blog.title %></h1>
+                <div class="blog-meta d-flex align-items-center mb-4">
+                  <% if (blog.createdBy && blog.createdBy.profileImage) { %>
+                  <img
+                    src="<%= blog.createdBy.profileImage %>"
+                    alt="Author"
+                    class="rounded-circle me-2"
+                    width="40"
+                    height="40"
+                  />
+                  <% } else { %>
+                  <div
+                    class="rounded-circle bg-primary d-flex align-items-center justify-content-center text-white me-2"
+                    style="width: 40px; height: 40px"
+                  >
+                    <%= blog.createdBy ?
+                    blog.createdBy.firstName[0].toUpperCase() : 'A' %>
+                  </div>
+                  <% } %>
+                  <div>
+                    <h6 class="mb-0">
+                      <%= blog.createdBy ? blog.createdBy.firstName + ' ' +
+                      blog.createdBy.lastName : 'Anonymous' %>
+                    </h6>
+                    <small class="text-muted"
+                      ><%= blog.createdAt.toLocaleDateString('en-US', { year:
+                      'numeric', month: 'long', day: 'numeric' }) %></small
+                    >
+                  </div>
+                </div>
+                <div class="blog-content mb-4">
+                  <p class="lead mb-4"><%= blog.description %></p>
+                  <!-- Add more blog content here -->
+                </div>
+                <div class="d-flex justify-content-between mb-4">
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary btn-interact">
+                      <i class="bi bi-hand-thumbs-up me-1"></i> Like
+                    </button>
+                    <button class="btn btn-outline-secondary btn-interact">
+                      <i class="bi bi-chat me-1"></i> Comment
+                    </button>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary btn-interact">
+                      <i class="bi bi-share me-1"></i> Share
+                    </button>
+                    <button class="btn btn-outline-secondary btn-interact">
+                      <i class="bi bi-bookmark me-1"></i> Save
+                    </button>
+                  </div>
+                </div>
+                <h4 class="mb-3">Comments (<%=blogComments.length%>)</h4>
+                <% if (locals.user) { %>
+                <form
+                  action="/blogs/<%=blog._id%>/comment"
+                  method="post"
+                  class="comment-form mb-4"
+                >
+                  <div class="mb-3">
+                    <label for="comment" class="form-label"
+                      >Add a comment</label
+                    >
+                    <textarea
+                      class="form-control"
+                      id="comment"
+                      name="comment"
+                      rows="3"
+                      required
+                    ></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">
+                    Post Comment
+                  </button>
+                </form>
+                <% } %>
+                <div class="comment-list">
+                  <% blogComments.forEach(comment => { %>
+                  <div class="comment">
+                    <div class="d-flex align-items-center mb-2">
+                      <img
+                        src="<%= comment.createdBy.profileImage %>"
+                        alt="Author"
+                        class="rounded-circle me-2"
+                        width="40"
+                        height="40"
+                      />
+                      <h5 class="mb-0">
+                        <%=comment.createdBy.firstName + " " +
+                        comment.createdBy.lastName%>
+                      </h5>
+                    </div>
+                    <p class="mb-0"><%=comment.comment%></p>
+                  </div>
+                  <% }) %>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%- include('./partials/footer'); %> <%- include('./partials/script'); %>
+    <script>
+      // Add smooth scrolling to comments
+      document
+        .querySelector(".btn-interact:nth-child(2)")
+        .addEventListener("click", function () {
+          document
+            .querySelector(".comment-form")
+            .scrollIntoView({ behavior: "smooth" });
+        });
+
+      // Add like functionality (this is just a visual representation, you'll need to implement the backend)
+      document
+        .querySelector(".btn-interact:first-child")
+        .addEventListener("click", function () {
+          this.classList.toggle("btn-primary");
+          this.classList.toggle("btn-outline-primary");
+        });
+    </script>
+  </body>
+</html>

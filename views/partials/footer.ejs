@@ -1,0 +1,141 @@
+<footer class="bg-dark text-light py-5">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-4 col-md-6">
+        <h5 class="fw-bold mb-3">About VichaarFlow</h5>
+        <p class="text-light mb-0">
+          Discover a vibrant platform for sharing thoughts, ideas, and stories.
+          Join our diverse community of writers and thinkers to explore new
+          perspectives and ignite your creativity.
+        </p>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <h5 class="fw-bold mb-3">Quick Links</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-2">
+            <a href="/" class="text-light text-decoration-none hover-link">
+              <i class="bi bi-house-door me-2"></i>Home
+            </a>
+          </li>
+          <% if (locals.user) { %>
+          <li class="mb-2">
+            <a
+              href="/blogs/create-blog"
+              class="text-light text-decoration-none hover-link"
+            >
+              <i class="bi bi-pencil-square me-2"></i>Create Blog
+            </a>
+          </li>
+          <li class="mb-2">
+            <a
+              href="/users/profile"
+              class="text-light text-decoration-none hover-link"
+            >
+              <i class="bi bi-person me-2"></i>My Profile
+            </a>
+          </li>
+          <% } else { %>
+          <li class="mb-2">
+            <a
+              href="/users/login"
+              class="text-light text-decoration-none hover-link"
+            >
+              <i class="bi bi-box-arrow-in-right me-2"></i>Login
+            </a>
+          </li>
+          <li class="mb-2">
+            <a
+              href="/users/register"
+              class="text-light text-decoration-none hover-link"
+            >
+              <i class="bi bi-person-plus me-2"></i>Register
+            </a>
+          </li>
+          <% } %>
+          <li class="mb-2">
+            <a href="/about" class="text-light text-decoration-none hover-link">
+              <i class="bi bi-info-circle me-2"></i>About Us
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-12">
+        <h5 class="fw-bold mb-3">Connect With Me</h5>
+        <div class="d-flex gap-3 mb-4">
+          <a
+            href="https://x.com/me_kirtangajjar"
+            class="text-light social-icon"
+            title="X (Twitter)"
+            target="_blank"
+          >
+            <i class="bi bi-twitter-x fs-4"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/me-kirtangajjar"
+            class="text-light social-icon"
+            title="LinkedIn"
+            target="_blank"
+          >
+            <i class="bi bi-linkedin fs-4"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/me_kirtangajjar"
+            class="text-light social-icon"
+            title="Instagram"
+            target="_blank"
+          >
+            <i class="bi bi-instagram fs-4"></i>
+          </a>
+          <a
+            href="https://github.com/me-kirtangajjar"
+            class="text-light social-icon"
+            title="GitHub"
+            target="_blank"
+          >
+            <i class="bi bi-github fs-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4 border-light" />
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="mb-0 text-light">
+          &copy; <%= new Date().getFullYear() %> VichaarFlow. All rights
+          reserved.
+        </p>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item">
+            <a
+              href="/privacy"
+              class="text-light text-decoration-none hover-link"
+              >Privacy Policy</a
+            >
+          </li>
+          <li class="list-inline-item mx-2">
+            <span class="text-light">|</span>
+          </li>
+          <li class="list-inline-item">
+            <a href="/terms" class="text-light text-decoration-none hover-link"
+              >Terms of Use</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .hover-link:hover {
+    color: #0d6efd !important;
+    transition: color 0.3s ease;
+  }
+  .social-icon:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+</style>

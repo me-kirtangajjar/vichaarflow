@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= user.firstName %>'s Profile | VichaarFlow</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .profile-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .profile-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      }
+      .profile-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border: 5px solid white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .stat-card {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        border-radius: 15px;
+        color: white;
+        transition: all 0.3s ease;
+      }
+      .stat-card:hover {
+        transform: scale(1.05);
+      }
+      .btn-edit-profile {
+        background-color: #6e8efb;
+        border: none;
+        transition: all 0.3s ease;
+      }
+      .btn-edit-profile:hover {
+        background-color: #5c7cfa;
+        transform: translateY(-2px);
+      }
+      .form-control:focus {
+        border-color: #6e8efb;
+        box-shadow: 0 0 0 0.2rem rgba(110, 142, 251, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar would go here -->
+
+    <div class="container my-5 animate__animated animate__fadeIn">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="profile-card p-4 text-center">
+            <div class="position-relative mb-4">
+              <% if (user.profileImage) { %>
+              <img
+                src="<%= user.profileImage %>"
+                alt="Profile Picture"
+                class="rounded-circle profile-image animate__animated animate__zoomIn"
+              />
+              <% } else { %>
+              <div
+                class="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center profile-image animate__animated animate__zoomIn"
+              >
+                <span class="text-white" style="font-size: 4rem"
+                  ><%= user.firstName[0].toUpperCase() %></span
+                >
+              </div>
+              <% } %>
+            </div>
+            <h3 class="mb-0"><%= user.firstName %> <%= user.lastName %></h3>
+            <p class="text-muted"><%= user.role %></p>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="profile-card p-4">
+            <h4 class="mb-4">Profile Information</h4>
+            <div
+              class="mb-3 animate__animated animate__fadeInUp"
+              style="animation-delay: 0.5s"
+            >
+              <label class="form-label text-muted">First Name</label>
+              <p class="form-control-plaintext"><%= user.firstName %></p>
+            </div>
+            <div
+              class="mb-3 animate__animated animate__fadeInUp"
+              style="animation-delay: 0.6s"
+            >
+              <label class="form-label text-muted">Last Name</label>
+              <p class="form-control-plaintext"><%= user.lastName %></p>
+            </div>
+            <div
+              class="mb-3 animate__animated animate__fadeInUp"
+              style="animation-delay: 0.7s"
+            >
+              <label class="form-label text-muted">Email</label>
+              <p class="form-control-plaintext"><%= user.email %></p>
+            </div>
+            <div
+              class="mb-3 animate__animated animate__fadeInUp"
+              style="animation-delay: 0.8s"
+            >
+              <label class="form-label text-muted">Role</label>
+              <p class="form-control-plaintext"><%= user.role %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer would go here -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <=
+            (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+    </script>
+  </body>
+</html>

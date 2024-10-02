@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('./partials/style'); %>
+    <title>Login - VichaarFlow</title>
+    <style>
+        .split-screen {
+            display: flex;
+            height: 100vh;
+        }
+        .left-half {
+            flex: 1;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 2rem;
+        }
+        .right-half {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        .animation-container {
+            text-align: center;
+        }
+        .animated-icon {
+            font-size: 5rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .form-container {
+            width: 80%;
+            max-width: 400px;
+        }
+        .form-control:focus {
+            border-color: #a777e3;
+            box-shadow: 0 0 0 0.2rem rgba(167, 119, 227, 0.25);
+        }
+        .btn-primary {
+            background-color: #a777e3;
+            border-color: #a777e3;
+        }
+        .btn-primary:hover {
+            background-color: #9666d3;
+            border-color: #9666d3;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/message'); %>
+    <div class="split-screen">
+        <div class="left-half">
+            <div class="animation-container">
+                <i class="bi bi-chat-quote animated-icon"></i>
+                <h1>Welcome Back to VichaarFlow</h1>
+                <p>Share your thoughts and connect with like-minded individuals</p>
+            </div>
+        </div>
+        <div class="right-half">
+            <div class="form-container">
+                <h2 class="text-center mb-4">Login</h2>
+                <form action="/users/login" method="post">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                    </button>
+                </form>
+                <p class="text-center mt-3">
+                    Don't have an account? <a href="/users/register">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/script'); %>
+    <script>
+        // Add any additional JavaScript for interactivity here
+    </script>
+</body>
+</html>

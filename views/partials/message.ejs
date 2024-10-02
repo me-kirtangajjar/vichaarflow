@@ -1,0 +1,31 @@
+<style>
+  .floating-alert-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 350px;
+  }
+
+  .floating-alert {
+    margin-bottom: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<% if (locals.error) { %>
+<div class="floating-alert-container">
+  <div
+    class="alert alert-danger alert-dismissible fade show floating-alert"
+    role="alert"
+  >
+    <%= locals.error %>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+</div>
+<% } %>

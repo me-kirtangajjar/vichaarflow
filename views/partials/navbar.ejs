@@ -1,0 +1,132 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+  <div class="container">
+    <!-- Left: Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img
+        src="/path/to/logo.png"
+        alt="VichaarFlow Logo"
+        width="30"
+        height="30"
+        class="me-2"
+      />
+      <h1 class="h5 mb-0">VichaarFlow</h1>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Right: User Actions -->
+      <div class="ms-auto d-flex align-items-center">
+        <% if (locals.user) { %>
+        <a class="btn btn-primary btn-sm me-3" href="/blogs/create-blog">
+          <i class="bi bi-plus-lg me-1"></i>Create Blog
+        </a>
+        <div class="dropdown">
+          <a
+            class="nav-link dropdown-toggle d-flex align-items-center"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <% if (locals.user.profileImage) { %>
+            <img
+              src="<%= locals.user.profileImage %>"
+              alt="Profile"
+              class="rounded-circle me-2"
+              width="42"
+              height="42"
+            />
+            <% } else { %>
+            <div
+              class="bg-secondary rounded-circle me-2 d-flex align-items-center justify-content-center"
+              style="width: 32px; height: 32px"
+            >
+              <span class="text-white small"
+                ><%= locals.user.firstName[0].toUpperCase() %></span
+              >
+            </div>
+            <% } %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li class="dropdown-header">
+              <strong
+                ><%= locals.user.firstName %> <%= locals.user.lastName
+                %></strong
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="/users/profile">
+                <i class="bi bi-person me-2"></i>Profile
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/users/saved-blogs">
+                <i class="bi bi-bookmark me-2"></i>Saved Blogs
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/users/liked-blogs">
+                <i class="bi bi-heart me-2"></i>Liked Blogs
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/users/comments">
+                <i class="bi bi-chat me-2"></i>Comments
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item text-danger" href="/users/logout">
+                <i class="bi bi-box-arrow-right me-2"></i>Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+        <% } else { %>
+        <a href="/users/login" class="btn btn-outline-light btn-sm me-2"
+          >Login</a
+        >
+        <a href="/users/register" class="btn btn-primary btn-sm">Register</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<style>
+  .navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-brand:hover {
+    opacity: 0.8;
+  }
+  .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  .btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+  }
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+  }
+  .dropdown-header {
+    font-size: 0.875rem;
+    color: #6c757d;
+  }
+</style>
